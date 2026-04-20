@@ -1,9 +1,10 @@
 const { defineConfig } = require("cypress");
+require("dotenv").config();
 
 module.exports = defineConfig({
   e2e: {
 
-    baseUrl: "https://mos-staging.vercel.app/",
+    baseUrl: process.env.BASE_URL,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
@@ -15,6 +16,7 @@ module.exports = defineConfig({
 
       //Usage in test script cy.visit(Cypress.env('adminuRL'))
       adminURL: "https://dmsmonoadmindev.z6.web.core.windows.net/",
+      SSO_URL: process.env.SSO_URL,
 
     }
   },

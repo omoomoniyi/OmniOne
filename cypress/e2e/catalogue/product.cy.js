@@ -13,10 +13,13 @@ describe('Product', () =>{
                                                                         //by userData.customerInfo[0]
             cy.validLoginFlow(customerDetailsInfo);
             cy.wait(20000);
-            cy.get(':nth-child(4) > .sc-bVVIot').click();
-            cy.get(':nth-child(1) > [style="height: 100%;"] > .eTOpKn').click();
+            cy.get('#sidebar-catalogue-page-link').click();
+            cy.wait(3000);
+            cy.get('#products').click();
+            cy.wait(3000);
             cy.get('#add-product-button').click();
-            cy.get('.sc-imWYAH > .sc-cVzyXr').click();
+            cy.wait(3000);
+            cy.contains('Add Single Product').click();
             cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
             cy.get('.iGcBwn').click();
             //selecting and item on the drop-down list
@@ -105,10 +108,13 @@ describe('Product', () =>{
                                                                       //by userData.customerInfo[0]
           cy.validLoginFlow(customerDetailsInfo);
           cy.wait(20000);
-          cy.get(':nth-child(4) > .sc-bVVIot').click();
-          cy.get(':nth-child(1) > [style="height: 100%;"] > .eTOpKn').click();
+          cy.get('#sidebar-catalogue-page-link').click();
+          cy.wait(3000);
+          cy.get('#products').click();
+          cy.wait(3000);
           cy.get('#add-product-button').click();
-          cy.get('.sc-imWYAH > .sc-cVzyXr').click();
+          cy.wait(3000);
+          cy.contains('Add Single Product').click();
           cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
           cy.get('.iGcBwn').click();
           //selecting and item on the drop-down list
@@ -154,10 +160,13 @@ describe('Product', () =>{
                                                                       //by userData.customerInfo[0]
           cy.validLoginFlow(customerDetailsInfo);
           cy.wait(20000);
-          cy.get(':nth-child(4) > .sc-bVVIot').click();
-          cy.get(':nth-child(1) > [style="height: 100%;"] > .eTOpKn').click();
+          cy.get('#sidebar-catalogue-page-link').click();
+          cy.wait(3000);
+          cy.get('#products').click();
+          cy.wait(3000);
           cy.get('#add-product-button').click();
-          cy.get('.sc-imWYAH > .sc-cVzyXr').click();
+          cy.wait(3000);
+          cy.contains('Add Single Product').click();
           cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
           cy.get('.iGcBwn').click();
           //selecting and item on the drop-down list
