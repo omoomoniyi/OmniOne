@@ -55,7 +55,7 @@
 //   cy.get('#continue-with-omni').click();
 
 //   // Step 2: Handle SSO domain
-//   cy.origin('https://sso-dev.vercel.app', () => {
+//   cy.origin(Cypress.env('SSO_URL'), () => {
 
 //     cy.get('#use-phone-number', { timeout: 10000 }).click();
 //     cy.get('#email-input').type('202265');
@@ -83,40 +83,37 @@
 
 Cypress.Commands.add("validLoginFlow", () => {
 
-  // Step 1: Click login (triggers redirect)
+  // Step 1: Click login (triggers redirect to SSO)
   cy.get('#continue-with-omni').click();
 
-  // Step 2: WAIT until you're on SSO domain
-  //cy.location('origin', { timeout: 50000 })
-   // .should('eq', 'https://sso-dev.vercel.app');
+  // Step 2: Give the SSO redirect time to initiate before entering cy.origin
+  cy.wait(3000);
 
-  // Step 3: NOW switch to SSO origin
-  cy.origin('https://sso-dev.vercel.app', () => {
+  // Step 3: Run login steps on SSO origin
+  cy.origin(Cypress.env('SSO_URL'), () => {
 
-    cy.get('#use-phone-number', { timeout: 10000 }).click();
+    cy.get('#use-phone-number', { timeout: 15000 }).click();
     cy.get('#email-input').type('202265');
     cy.contains('button', 'Continue').click();
     cy.get('input[type="password"]').type('12345678');
     cy.get('#signin-button').click();
-    cy.wait(10000);
 
-    cy.get('body').then(($body) => {
+    // Handle optional consent modal before SSO redirects back to main app
+    cy.get('body', { timeout: 15000 }).then(($body) => {
 
-      const modalHeader = $body.find('h2:contains("Grant OmniOne Access to Your Data")');
-    
-      if (modalHeader.length) {
-    
+      if ($body.find('h2:contains("Grant OmniOne Access to Your Data")').length) {
+
         cy.contains('h2', 'Grant OmniOne Access to Your Data')
-          .closest('div')            // move up to modal container
-          .parent()                 // ensure full modal scope
+          .closest('div')
+          .parent()
           .within(() => {
             cy.contains('button', 'Grant Access').click();
           });
-    
+
       } else {
         cy.log('Grant Access modal not present');
       }
-    
+
     });
 
   });
