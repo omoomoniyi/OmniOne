@@ -1,6 +1,6 @@
 describe('Product', () =>{
 
-    it.only('Creating Product', () => {
+    it('Creating Product', () => {
 
         cy.visit('/');
 
@@ -20,10 +20,10 @@ describe('Product', () =>{
             cy.get('#add-product-button').click();
             cy.wait(3000);
             cy.contains('Add Single Product').click();
-            cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
+            cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
             cy.get('.iGcBwn').click();
             //selecting and item on the drop-down list
-            cy.contains('TEST WET HAIR SKU')
+            cy.contains('Test-ing')
                 .first()
                 .click();
             cy.get('.dPGPhg').click();
@@ -115,17 +115,17 @@ describe('Product', () =>{
           cy.get('#add-product-button').click();
           cy.wait(3000);
           cy.contains('Add Single Product').click();
-          cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
+          cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
           cy.get('.iGcBwn').click();
           //selecting and item on the drop-down list
-          cy.contains('TEST WET HAIR SKU')
+          cy.contains('Test-ing')
               .first()
               .click();
           cy.get('.dPGPhg').click();
           cy.generateVariant().then((variant) => {
               cy.get('#general-info-variant').type(variant);
             });
-          cy.get('#general-info-manufacturer-sku-code').type("MFG-TYVYEW");
+          cy.get('#general-info-manufacturer-sku-code').type("MFG-EBRF74");
           cy.get(':nth-child(1) > #general-info-packaging-type').click();
           cy.contains('CASE')
             .first()
@@ -167,10 +167,10 @@ describe('Product', () =>{
           cy.get('#add-product-button').click();
           cy.wait(3000);
           cy.contains('Add Single Product').click();
-          cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
+          cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
           cy.get('.iGcBwn').click();
           //selecting and item on the drop-down list
-          cy.contains('TEST WET HAIR SKU')
+          cy.contains('Test-ing')
               .first()
               .click();
           cy.get('.dPGPhg').click();
@@ -253,14 +253,15 @@ describe('Product', () =>{
                                                                     //by userData.customerInfo[0]
         cy.validLoginFlow(customerDetailsInfo);
         cy.wait(20000);
-        cy.get(':nth-child(4) > .sc-bVVIot').click();
-        cy.get(':nth-child(1) > [style="height: 100%;"] > .eTOpKn').click();
+        cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+        cy.get('#products').click();
         cy.get('#add-product-button').click();
-        cy.get('.sc-imWYAH > .sc-cVzyXr').click();
-        cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('TEST WET HAIR SKU');
+        //cy.get(':nth-child(7) > [data-layer="Padding"]').click();
+        cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
+        cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
         cy.get('.iGcBwn').click();
         //selecting and item on the drop-down list
-        cy.contains('TEST WET HAIR SKU')
+        cy.contains('Test-ing')
             .first()
             .click();
         cy.get('.dPGPhg').click();
@@ -321,7 +322,7 @@ describe('Product', () =>{
            });
 
         cy.generateBarcode().then((barcode) => {
-            cy.get('#certification-product-barcode-number').type("3046663534350");
+            cy.get('#certification-product-barcode-number').type("5611471582527");
           });
           cy.get('#add-product-proceed-button').click();
           cy.get('#add-product-proceed-button').click();
