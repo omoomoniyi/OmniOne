@@ -120,6 +120,46 @@ Cypress.Commands.add("validLoginFlow", () => {
 
 });
 
+Cypress.Commands.add("signup", () => {
+
+  // Step 1: Click login (triggers redirect to SSO)
+  cy.get('#continue-with-omni').click();
+
+  // Step 2: Give the SSO redirect time to initiate before entering cy.origin
+  cy.wait(3000);
+
+  // Step 3: Run login steps on SSO origin
+  cy.origin(Cypress.env('SSO_URL'), () => {
+
+    cy.get('create-account-button', { timeout: 15000 }).click();
+    cy.get('irst-name-input').type('Omoniyi');
+    cy.get('irst-name-input').type('Solomon');
+    cy.contains('button', 'Continue').click();
+    cy.get('input[type="password"]').type('12345678');
+    cy.get('#signin-button').click();
+
+    // Handle optional consent modal before SSO redirects back to main app
+    cy.get('body', { timeout: 15000 }).then(($body) => {
+
+      if ($body.find('h2:contains("Grant OmniOne Access to Your Data")').length) {
+
+        cy.contains('h2', 'Grant OmniOne Access to Your Data')
+          .closest('div')
+          .parent()
+          .within(() => {
+            cy.contains('button', 'Grant Access').click();
+          });
+
+      } else {
+        cy.log('Grant Access modal not present');
+      }
+
+    });
+
+  });
+
+});
+
 
 
 Cypress.Commands.add("invalidPhoneValidPassword", (userData) => {
