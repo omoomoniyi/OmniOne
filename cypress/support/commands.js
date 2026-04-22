@@ -232,7 +232,7 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add("generatePhoneNumber", (prefix = "080") => {
+Cypress.Commands.add("generatePhoneNumber", (prefix = "80") => {
   return prefix + Math.floor(10000000 + Math.random() * 90000000);
 });
 
@@ -287,4 +287,8 @@ Cypress.Commands.add('generateBarcode', () => {
 Cypress.Commands.add('generateEmployeeCode', () => {
   const employeeCode = faker.string.alphanumeric(8).toUpperCase();
   return cy.wrap(employeeCode);
+});
+
+Cypress.Commands.add('generateEmail', () => {
+  return cy.wrap(faker.internet.email());
 });
