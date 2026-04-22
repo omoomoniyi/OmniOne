@@ -245,12 +245,13 @@ Cypress.Commands.add("generateEmail", (domain = "test.com") => {
 const { faker } = require('@faker-js/faker');
 
 Cypress.Commands.add('generateFullName', () => {
-    const firstName = faker.person.firstName(); // Generate a random first name
-    const lastName = faker.person.lastName();   // Generate a random last name
-    return `${firstName} ${lastName}`;          // Return full name
+  return cy.wrap({
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName()
   });
+});
 
-//
+
 Cypress.Commands.add('generateVariant', () => {
   const variant = `SKU-${faker.string.alphanumeric(8)}`;
   return variant;
@@ -280,4 +281,10 @@ Cypress.Commands.add('generateBarcode', () => {
   const barcode = [...digits, checkDigit].join('');
 
   cy.wrap(barcode);
+});
+
+
+Cypress.Commands.add('generateEmployeeCode', () => {
+  const employeeCode = faker.string.alphanumeric(8).toUpperCase();
+  return cy.wrap(employeeCode);
 });
