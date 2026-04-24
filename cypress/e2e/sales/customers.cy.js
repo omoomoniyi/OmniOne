@@ -1,5 +1,6 @@
 describe("Customers", () => {
   it("Adding New Customers", () => {
+
     cy.visit("/");
 
     //cy.screenshot("Home Page")
@@ -8,8 +9,10 @@ describe("Customers", () => {
       let customerDetailsInfo = userData.customerInfo[0];
       cy.validLoginFlow(customerDetailsInfo);
 
-      cy.wait(5000);
-      cy.get(".burger > .material-symbols-outlined").click();
+      cy.wait(20000);
+      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      
+      
       cy.get(":nth-child(2) > .sidebar-nav-item--link > span").click();
       cy.get(".btn").click();
       cy.generateFullName().then((fullName) => {
