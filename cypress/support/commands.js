@@ -292,3 +292,12 @@ Cypress.Commands.add('generateEmployeeCode', () => {
 Cypress.Commands.add('generateEmail', () => {
   return cy.wrap(faker.internet.email());
 });
+
+//firstName generation
+Cypress.Commands.add('generateFirstName', () => {
+  return cy.wrap(faker.person.firstName());
+});
+
+Cypress.Commands.add('generateLastName', () => {
+  return cy.wrap(faker.person.lastName());
+});
