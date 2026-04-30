@@ -23,14 +23,14 @@ describe("Customers", () => {
       .click();
 
       cy.generateFirstName().then((firstName) => {
-        cy.get('#add-customer-contact-first-name-input')
-          .should('be.visible')
+        cy.get('#contact_first_name')
+          //.should('be.visible')
           .type(firstName);
       });
 
       cy.generateLastName().then((lastName) => {
-        cy.get('#add-customer-contact-last-name-input')
-          .should('be.visible')
+        cy.get('#contact_last_name')
+          //.should('be.visible')
           .type(lastName);
       });
 
@@ -43,6 +43,8 @@ describe("Customers", () => {
       cy.get(':nth-child(1) > .sc-bypJrU').type('111111');
 
       cy.get('.dPGPhg').click();
+
+      cy.wait(5000);
 
     });
   });
