@@ -308,5 +308,27 @@ Cypress.Commands.add('generateBeatplanName', () => {
 });
 
 
+Cypress.Commands.add('setStartAndEndDate', (daysAhead = 6) => {
 
+  const startDate = new Date();
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + daysAhead);
+
+  const formatDate = (date) => {
+    return date.toISOString().split('T')[0]; // yyyy-mm-dd
+  };
+
+  const start = formatDate(startDate);
+  const end = formatDate(endDate);
+
+  // Start Date
+  cy.get('#start_date')   // 🔁 update selector if needed
+    .clear()
+    .type(start);
+
+  // End Date
+  cy.get('#end_date')     // 🔁 update selector if needed
+    .clear()
+    .type(end);
+});
 
