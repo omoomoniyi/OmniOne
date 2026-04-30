@@ -301,3 +301,12 @@ Cypress.Commands.add('generateFirstName', () => {
 Cypress.Commands.add('generateLastName', () => {
   return cy.wrap(faker.person.lastName());
 });
+
+Cypress.Commands.add('generateBeatplanName', () => {
+  const name = `BP-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  return cy.wrap(name);
+});
+
+
+
+
