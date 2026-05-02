@@ -1,5 +1,5 @@
-describe("Customers", () => {
-    it("Adding New Customers", () => {
+describe("productivityTracker", () => {
+    it("Verify user is able to create beatplan successfully", () => {
   
       cy.visit("/");
   
