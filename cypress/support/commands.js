@@ -332,3 +332,9 @@ Cypress.Commands.add('setStartAndEndDate', (daysAhead = 6) => {
     .type(end);
 });
 
+
+
+Cypress.Commands.add('generateBusinessName', () => {
+  return `${faker.company.name()} ${faker.word.noun()}`;
+});
+
