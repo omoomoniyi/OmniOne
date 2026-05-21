@@ -131,9 +131,9 @@ Cypress.Commands.add("signup", () => {
   // Step 3: Run login steps on SSO origin
   cy.origin(Cypress.env('SSO_URL'), () => {
 
-    cy.get('create-account-button', { timeout: 15000 }).click();
-    cy.get('irst-name-input').type('Omoniyi');
-    cy.get('irst-name-input').type('Solomon');
+    cy.get('#createaccount-button', { timeout: 15000 }).click();
+    cy.get('#first-name-input').type('Omoniyi');
+    cy.get('#last-name-input').type('Solomon');
     cy.contains('button', 'Continue').click();
     cy.get('input[type="password"]').type('12345678');
     cy.get('#signin-button').click();

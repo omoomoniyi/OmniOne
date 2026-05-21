@@ -15,7 +15,8 @@ describe("Customers", () => {
       cy.get('#customers').click();
       cy.wait(5000);
       cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
-      cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+      cy.get('#add_single_customer-button').click();
+      // cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
       cy.get(':nth-child(1) > :nth-child(1) > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
       cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Distributor')
       cy.contains('Distributor')
@@ -305,6 +306,52 @@ describe("Customers", () => {
       cy.wait(2000);
       cy.contains('Please fill all required fields in Location Details.');
       cy.wait(10000);
+
+    });
+  });
+
+  it("Verify user is able to re-assign customer successfully ", () => {
+
+    cy.visit("/");
+
+    //cy.screenshot("Home Page")
+
+    cy.fixture("customerData").then((userData) => {
+      let customerDetailsInfo = userData.customerInfo[0];
+      cy.validLoginFlow(customerDetailsInfo);
+
+      cy.wait(20000);
+      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      
+      cy.get('#customers').click();
+      cy.wait(5000);
+      cy.get('.sc-eeDRCX > div > .sc-gsFSXt').click();
+      cy.get('#reassign_customers-button').click();
+      cy.get(5000);
+      cy.get('#assign_from').click();
+      cy.wait(10000);
+      cy.get('#assign_from-search').type('Rasak ')
+      cy.contains('Rasak ')
+        .first()
+        .click();
+      // cy.get('#assign_from')
+      cy.get('body').click(0, 0);
+      cy.get(':nth-child(2) > .sc-czkgLO').click();
+
+      cy.get('tbody tr label').eq(8).click();
+ 
+      //cy.get('#checkbox_row_1855890').click();
+      cy.get('#assign_to').click();
+      cy.wait(10000);
+      cy.get('#assign_to-search').type('SFA ')
+      cy.contains('SFA ')
+      .first()
+      .click();
+      cy.get('#assign-employee-to-customer-button').click();
+
+
+
+
 
     });
   });

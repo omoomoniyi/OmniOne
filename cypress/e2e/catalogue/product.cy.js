@@ -50,11 +50,6 @@ describe('Product', () =>{
             cy.get('#measurement-shipping-depth').type("2");
             cy.get('#measurement-shipping-height').type("3");
             cy.get('#measurement-shipping-width').type("4");
-            // cy.get('#measurement-shipping-weight-unit').click();
-            // cy.get('input')
-            //     .type('kg');
-            // cy.contains('kg')
-            //     .click();
             cy.get(':nth-child(1) > #measurement-shipping-weight-unit').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("kg")
             cy.get('.sc-esYiGC').click();
