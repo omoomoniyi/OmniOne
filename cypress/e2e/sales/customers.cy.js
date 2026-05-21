@@ -310,7 +310,7 @@ describe("Customers", () => {
     });
   });
 
-  it.only("Verify user is able to re-assign customer successfully ", () => {
+  it("Verify user is able to re-assign customer successfully ", () => {
 
     cy.visit("/");
 
@@ -338,18 +338,7 @@ describe("Customers", () => {
       cy.get('body').click(0, 0);
       cy.get(':nth-child(2) > .sc-czkgLO').click();
 
-
-
-      // cy.get('table tr')
-      // cy.get(':nth-child(2) > .sc-dycYrq > .craTjX > .dctKQR')
-      //   .last()
-      //   .find('input[type="checkbox"]')
-      //   .click();
-
-
-
-
-      cy.get('tbody tr label').eq(0).click();
+      cy.get('tbody tr label').eq(8).click();
  
       //cy.get('#checkbox_row_1855890').click();
       cy.get('#assign_to').click();
