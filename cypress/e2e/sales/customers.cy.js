@@ -349,7 +349,7 @@ describe("Customers", () => {
 
 
 
-      cy.get('tbody tr input[type="checkbox"]').eq(0).click();
+      cy.get('tbody tr label').eq(0).click();
  
       //cy.get('#checkbox_row_1855890').click();
       cy.get('#assign_to').click();
