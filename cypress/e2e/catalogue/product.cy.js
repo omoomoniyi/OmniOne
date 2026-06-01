@@ -401,7 +401,7 @@ describe('Product', () =>{
 
   });
 
-  it.only('Verify user Is able to view SKU', () => {
+  it('Verify user Is able to view SKU', () => {
 
     cy.visit('/');
 
