@@ -334,26 +334,117 @@ describe('Product', () =>{
         cy.validLoginFlow(customerDetailsInfo);
         cy.wait(20000);
         cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+        cy.wait(5000);
         cy.get('#products').click();
-        cy.get('.dctKQR')
-            .first()
-            .find('td:last')
-            .click();
-        //cy.get('#product-45783-action-button').click();
-        cy.get('#product-45784-action-button').click();
-        cy.get('.sc-koXPm > :nth-child(2) > .sc-cVzyXr').click();
+        //Start - clicking on Ellipse on Product
+        cy.get('tbody tr')
+          .first()
+          .find('[id$="-action-button"]')
+          .click();
+        //End - clicking on Ellipse on Product
+        cy.wait(5000);
+        cy.get('[id$="-Edit-button"]').click();
+        cy.wait(10000);
         cy.get('#add-product-proceed-button').click();
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#add-product-proceed-button').click();
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#add-product-proceed-button').click();
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#add-product-proceed-button').click();
-        cy.wait(1000);
+
+        cy.get('#certification-certificate-number-1')
+          .invoke('val')
+          .then((currentValue) => {
+        cy.get('#certification-certificate-number-1')
+          .clear()
+          .type(`${currentValue}+1`);
+        });
+
+        cy.wait(5000);
         cy.get('#add-product-proceed-button').click();
 
     });
 
   });
 
+  it('Verify user Is able to deactivate SKU', () => {
+
+    cy.visit('/');
+
+
+    cy.fixture('customerData').then((userData)=>{
+
+        let customerDetailsInfo = userData.customerInfo[0];
+        //let addressdDetails = customerDetailsInfo.address.place   //Address usage is control 
+                                                                    //by userData.customerInfo[0]
+        cy.validLoginFlow(customerDetailsInfo);
+        cy.wait(20000);
+        cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+        cy.wait(5000);
+        cy.get('#products').click();
+        //Start - clicking on Ellipse on Product
+        cy.get('tbody tr')
+          .first()
+          .find('[id$="-action-button"]')
+          .click();
+        //End - clicking on Ellipse on Product
+        cy.wait(5000);
+        cy.get('[id$="Deactivate Product-button"]')
+          .first()
+          .click();
+          cy.get('#confirm-deactivate-button').click();
+        cy.contains('Product deactivated successfully!')
+          .should('be.visible');
+
+    });
+
+  });
+
+  it.only('Verify user Is able to view SKU', () => {
+
+    cy.visit('/');
+
+
+    cy.fixture('customerData').then((userData)=>{
+
+        let customerDetailsInfo = userData.customerInfo[0];
+        //let addressdDetails = customerDetailsInfo.address.place   //Address usage is control 
+                                                                    //by userData.customerInfo[0]
+        cy.validLoginFlow(customerDetailsInfo);
+        cy.wait(20000);
+        cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+        cy.wait(5000);
+        cy.get('#products').click();
+        //Start - clicking on Ellipse on Product
+        cy.get('tbody tr')
+          .first()
+          .find('[id$="-action-button"]')
+          .click();
+        //End - clicking on Ellipse on Product
+        cy.wait(5000);
+        cy.get('[id$="-View-button"]').click();
+
+        cy.wait(5000);
+
+        cy.contains('Measurement').should('be.visible');
+        cy.contains('MOQ').should('be.visible');
+        cy.contains('Certifications').should('be.visible');
+        cy.contains('Pricing Details').should('be.visible');
+        cy.contains('SKU Images').should('be.visible');
+
+
+
+
+
+        // cy.get('[id$="Deactivate Product-button"]')
+        //   .first()
+        //   .click();
+        //   cy.get('#confirm-deactivate-button').click();
+        // cy.contains('Product deactivated successfully!')
+        //   .should('be.visible');
+
+    });
+
+  });
 });

@@ -338,3 +338,44 @@ Cypress.Commands.add('generateBusinessName', () => {
   return `${faker.company.name()} ${faker.word.noun()}`;
 });
 
+
+
+Cypress.Commands.add('generatePromoName', () => {
+  const promoName = `PROMO-${faker.string.alphanumeric(6)}`;
+
+  cy.wrap(promoName);
+});
+
+Cypress.Commands.add('setPromoDates', () => {
+
+  const today = new Date();
+
+  const end = new Date();
+  end.setDate(today.getDate() + 3);
+
+  const startDay = today.getDate().toString();
+  const endDay = end.getDate().toString();
+
+  // START DATE
+  cy.get('#start_date')
+    .should('be.visible')
+    .click();
+
+  cy.contains('.rdrDay:not(.rdrDayPassive)', startDay)
+    .scrollIntoView()
+    .trigger('mouseover')
+    .click({ force: true });
+
+  // END DATE
+  cy.get('#end_date')
+    .should('be.visible')
+    .click();
+
+  cy.contains('.rdrDay:not(.rdrDayPassive)', endDay)
+    .scrollIntoView()
+    .trigger('mouseover')
+    .click({ force: true });
+
+});
+
+
