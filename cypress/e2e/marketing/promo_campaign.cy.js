@@ -1,6 +1,6 @@
 describe('Marketing', () =>{
 
-    it('Creating New Promo', () => {
+    it('Verify user is a able to Create new promo type - Cashback', () => {
 
         cy.visit('/');
 
@@ -14,6 +14,7 @@ describe('Marketing', () =>{
             cy.validLoginFlow(customerDetailsInfo);
             cy.wait(20000);
             cy.get('#marketing').click();
+            cy.wait(2000);
             cy.get('#promo-and-campaigns').click();
             cy.get('#create-promo').click();
             cy.get('#cashback-and-loyalty').click();
@@ -23,77 +24,161 @@ describe('Marketing', () =>{
             cy.generatePromoName().then((promoName) => {
                 cy.log(promoName);
               
-                cy.get('#promo_name')
+            cy.get('#promo_name')
                   .type(promoName);
               });
 
             cy.setPromoDates();
 
             cy.get('#create-promo-proceed-btn-trigger').click();
+            cy.get('#select_brand').click();
+            cy.get('[id*="-option-"]')
+                .first()
+                .click();
+            cy.get('#select_sku_that_applies_to_promo').click();
+            cy.wait(5000)
+            cy.get('[id*="-option-"]')
+                .eq(1)
+                .click();
+            cy.get('#minimum_order_quantity').type('5');
+            cy.get('#total_amount_dedicated_to_this_cashback').type(10000);
+            cy.get('#total_cashback_value_per_customer').type(200);
+            cy.get('#how_many_times_is_a_customer_eligible_for_this').type(10);
+
+            cy.get('#location_selector').click();
+            cy.get('[id*="-option-"]')
+            .first()
+            .click();
+            cy.get('body').click(0, 0);
+            cy.wait(5000);
+
+
+
+            cy.get('#state').click();
+
+            cy.get('[id^="state-option-"]')
+            .then($options => {
+
+                const states = [...$options]
+                .map(el => el.innerText.trim())
+                .filter(text => text !== 'All')
+                .sort();
+
+                const randomState = states[Math.floor(Math.random() * states.length)];
+
+                cy.contains(randomState).click();
+            });
+
+
+
+
+
+            cy.get('body').click(0, 0);
+            cy.get('#which_customer_type_do_you_want_this_to_apply_to').click();
+            cy.get('[id*="-option-"]')
+                .first()
+                .click();
+            cy.get('body').click(0, 0);
+            cy.get('#customer_app').click();
+            cy.get('#agent_app').click();
+            cy.get('#Create-Promo-Button').click();
+            cy.contains('Promo created successfully!')
+               .should('be.visible');
+            cy.wait(2000);
+
+
+        });
+
+    });
+
+    it('Verify user is a able Deactivate Promo type - Cashback', () => {
+
+        cy.visit('/');
+
+        //cy.screenshot("Home Page")
+
+        cy.fixture('customerData').then((userData)=>{
+
+            let customerDetailsInfo = userData.customerInfo[0];
+            //let addressdDetails = customerDetailsInfo.address.place   //Address usage is control 
+                                                                        //by userData.customerInfo[0]
+            cy.validLoginFlow(customerDetailsInfo);
+            cy.wait(20000);
+            cy.get('#marketing').click();
+            cy.wait(2000);
+            cy.get('#promo-and-campaigns').click();
+            cy.get('tbody tr')
+            .first()
+            .find('[id$="-action-button"]')
+            .click();
+            cy.get('[id$="Deactivate Promo-button"]').click();
+            cy.wait(2000);
+            cy.get('#deactivate-promo-confirm').click();
+            cy.contains('has been disabled successfully')
+                    .should('be.visible');
+            cy.wait(5000);
+
+
+
+        });
+
+    });
+
+    it('Verify that user is able click on the Deactivated Promos Tab', () => {
+
+        cy.visit('/');
+
+        //cy.screenshot("Home Page")
+
+        cy.fixture('customerData').then((userData)=>{
+
+            let customerDetailsInfo = userData.customerInfo[0];
+            //let addressdDetails = customerDetailsInfo.address.place   //Address usage is control 
+                                                                        //by userData.customerInfo[0]
+            cy.validLoginFlow(customerDetailsInfo);
+            cy.wait(20000);
+            cy.get('#marketing').click();
+            cy.get(2000);
+            cy.get('#promo-and-campaigns').click();
+            cy.get('#promo-top-card-inactive').click();
+            cy.wait(5000);
+
+
+
+
+        });
+
+    });
+
+    it('Verify that user is able view Active Promos', () => {
+
+        cy.visit('/');
+
+        //cy.screenshot("Home Page")
+
+        cy.fixture('customerData').then((userData)=>{
+
+            let customerDetailsInfo = userData.customerInfo[0];
+            //let addressdDetails = customerDetailsInfo.address.place   //Address usage is control 
+                                                                        //by userData.customerInfo[0]
+            cy.validLoginFlow(customerDetailsInfo);
+            cy.wait(20000);
+            cy.get('#marketing').click();
+            cy.wait(2000);
+            cy.get('#promo-and-campaigns').click();
+            cy.get('tbody tr')
+                .first()
+                .find('[id$="-action-button"]')
+                .click();
+            cy.wait(5000);
+            cy.get('[id$="View Promo-button"]').click();
+
+            cy.contains('Promo Details')
+                .should('be.visible');
+
+            cy.contains('Active')
+                .should('be.visible');
             
-
-
-        //     cy.get('#employee-dir-actions').click();
-        //     cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
-        //     cy.wait(3000);
-
-        //     cy.generateFullName().then(({ firstName, lastName }) => {
-        //         cy.get(':nth-child(1) > .sc-dtInlp > #employee-name').type(firstName);
-        //         cy.get(':nth-child(2) > .sc-dtInlp > #employee-name').type(lastName);
-        //       });
-        //     cy.get('.sc-eeDRCX > :nth-child(1) > #employee-team').click();
-        //     cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("QA Team")
-        //     cy.contains('QA Team')
-        //       .first()
-        //       .click();
-        //     cy.wait(2000);
-        //     cy.generateEmployeeCode().then((code) => {
-        //         cy.get('#employee-code').type(code);
-        //       });
-        //     cy.get('.sc-eeDRCX > :nth-child(1) > #employee-role').click();
-        //     cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("Field Sales Manager");
-        //     cy.contains('Field Sales Manager')
-        //       .first()
-        //       .click();
-        //     cy.wait(2000);
-        //     cy.get('.sc-eeDRCX > :nth-child(1) > #employee-role-to-report-to-3110').click();
-        //     cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("SFA TESTING");
-        //     cy.contains('SFA TESTING')
-        //     .first()
-        //     .click();
-        //   cy.wait(2000);
-        //   cy.get('body').click(0, 0);
-        //   cy.generateEmail().then((email) => {
-        //     cy.get('#employee-email').type(email);
-        //   });
-
-        //   cy.generatePhoneNumber().then((phonenumber) => {
-        //     cy.get('[style="width: 100%; margin-top: -4px;"] > .sc-fBWQRA > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type(phonenumber);
-        //   });
-        //   cy.get('.sc-eeDRCX > :nth-child(1) > #employee-office-address').click();
-        // //   cy.get('[data-testid="address-dropdown"]').click(); // open dropdown
-        //     cy.get('.sc-koXPm')   // adjust to actual item selector
-        //         .eq(0)                  // first item (index 0)
-        //         .click();
-        //   cy.get('.dpJqzr > .sc-dCFHLc > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
-        //   cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("State")
-        //   cy.contains('State')
-        //   .first()
-        //   .click();
-        //   cy.get('body').click(0, 0);
-        //   cy.get('.sc-eDPEui > .dctKQR > :nth-child(2) > .sc-imWYAH > .sc-dCFHLc > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
-        //   cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("All")
-        //   cy.contains('All')
-        //   .first()
-        //   .click();
-        //   cy.get('.iQZvxT').click();
-        //   cy.wait(2000);
-        //   cy.contains('Employee Created').should('be.visible');
-
-
-        
-          
-
         });
 
     });

@@ -10,13 +10,22 @@ describe("Customers", () => {
       cy.validLoginFlow(customerDetailsInfo);
 
       cy.wait(20000);
-      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      cy.get('#sales').click();
       
       cy.get('#customers').click();
       cy.wait(5000);
-      cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
+
+      cy.get('#popover-wrapper-module-button-actions').click();
+      //cy.get('#popover-wrapper-_r_e_').click();
       cy.get('#add_single_customer-button').click();
+      
+      // cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
+      // //cy.get('#add_single_customer-button').click();
+
+
+      //-------Never need, dont uncomment it
       // cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+      
       cy.get(':nth-child(1) > :nth-child(1) > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
       cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Distributor')
       cy.contains('Distributor')
@@ -40,6 +49,8 @@ describe("Customers", () => {
       });
 
       cy.get('#proceed-btn-trigger').click();
+
+      cy.wait(5000);
 
       cy.get(':nth-child(1) > .sc-bypJrU').type('111111');
 
@@ -95,13 +106,23 @@ describe("Customers", () => {
       let customerDetailsInfo = userData.customerInfo[0];
       cy.validLoginFlow(customerDetailsInfo);
 
+      //cy.wait(20000);
+
       cy.wait(20000);
-      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      cy.get('#sales').click();
       
       cy.get('#customers').click();
       cy.wait(5000);
-      cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
-      cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+
+      cy.get('#popover-wrapper-module-button-actions').click();
+      //cy.get('#popover-wrapper-_r_e_').click();
+      cy.get('#add_single_customer-button').click();
+      // cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      
+      // cy.get('#customers').click();
+      cy.wait(5000);
+      // cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
+      // cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
       cy.get(':nth-child(1) > :nth-child(1) > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
       cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Distributor')
       cy.contains('Distributor')
@@ -123,6 +144,8 @@ describe("Customers", () => {
       cy.get(':nth-child(3) > .sc-fBWQRA > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('8059864828');
 
       cy.get('#proceed-btn-trigger').click();
+
+      cy.wait(5000);
 
 
       cy.get(':nth-child(1) > .sc-bypJrU').type('111111');
@@ -182,13 +205,23 @@ describe("Customers", () => {
       let customerDetailsInfo = userData.customerInfo[0];
       cy.validLoginFlow(customerDetailsInfo);
 
+      // cy.wait(20000);
+      // cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      
+      // cy.get('#customers').click();
+      // cy.wait(5000);
+      // cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
+      // cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+
       cy.wait(20000);
-      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      cy.get('#sales').click();
       
       cy.get('#customers').click();
       cy.wait(5000);
-      cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
-      cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+
+      cy.get('#popover-wrapper-module-button-actions').click();
+      //cy.get('#popover-wrapper-_r_e_').click();
+      cy.get('#add_single_customer-button').click();
       cy.get(':nth-child(1) > :nth-child(1) > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
       cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Distributor')
       cy.contains('Distributor')
@@ -210,6 +243,8 @@ describe("Customers", () => {
       cy.get(':nth-child(3) > .sc-fBWQRA > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('8059864828');
 
       cy.get('#proceed-btn-trigger').click();
+
+      cy.wait(5000);
 
 
       cy.get(':nth-child(1) > .sc-bypJrU').type('999999');
@@ -234,13 +269,23 @@ describe("Customers", () => {
       let customerDetailsInfo = userData.customerInfo[0];
       cy.validLoginFlow(customerDetailsInfo);
 
+      // cy.wait(20000);
+      // cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      
+      // cy.get('#customers').click();
+      // cy.wait(5000);
+      // cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
+      // cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+
       cy.wait(20000);
-      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      cy.get('#sales').click();
       
       cy.get('#customers').click();
       cy.wait(5000);
-      cy.get('.sc-eeDRCX > :nth-child(1) > .sc-gsFSXt').click();
-      cy.get('.sc-imWYAH > :nth-child(1) > .sc-bVVIot').click();
+
+      cy.get('#popover-wrapper-module-button-actions').click();
+      //cy.get('#popover-wrapper-_r_e_').click();
+      cy.get('#add_single_customer-button').click();
       cy.get(':nth-child(1) > :nth-child(1) > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
       cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Distributor')
       cy.contains('Distributor')
@@ -264,6 +309,8 @@ describe("Customers", () => {
       });
 
       cy.get('#proceed-btn-trigger').click();
+
+      cy.wait(5000);
 
       cy.get(':nth-child(1) > .sc-bypJrU').type('111111');
 
@@ -321,11 +368,18 @@ describe("Customers", () => {
       cy.validLoginFlow(customerDetailsInfo);
 
       cy.wait(20000);
-      cy.get('#sidebar-sales-page-link > .sc-cVzyXr').click();
+      cy.get('#sales').click();
       
       cy.get('#customers').click();
       cy.wait(5000);
-      cy.get('.sc-eeDRCX > div > .sc-gsFSXt').click();
+
+      cy.get('#popover-wrapper-module-button-actions').click();
+      //cy.get('#popover-wrapper-_r_e_').click();
+
+
+
+
+      //cy.get('.sc-eeDRCX > div > .sc-gsFSXt').click();
       cy.get('#reassign_customers-button').click();
       cy.get(5000);
       cy.get('#assign_from').click();
