@@ -46,6 +46,7 @@ describe('Product', () =>{
             cy.get('.dPGPhg').click();
             cy.wait(5000)
             cy.get('#add-product-proceed-button').click()
+            cy.wait(5000)
             cy.get('#measurement-shipping-weight').type("1");
             cy.get('#measurement-shipping-depth').type("2");
             cy.get('#measurement-shipping-height').type("3");
@@ -67,7 +68,9 @@ describe('Product', () =>{
             cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
             cy.get('#add-product-proceed-button').click();
+            cy.wait(5000)
             cy.get('#add-product-proceed-button').click();
+            cy.wait(5000)
 
             cy.get('.sc-eeDRCX > :nth-child(1) > #certification-certificate-type').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("NAFDAC")
@@ -82,7 +85,9 @@ describe('Product', () =>{
                 cy.get('#certification-product-barcode-number').type(barcode);
               });
               cy.get('#add-product-proceed-button').click();
+              cy.wait(5000)
               cy.get('#add-product-proceed-button').click();
+              cy.wait(5000)
 
 
 
@@ -188,6 +193,7 @@ describe('Product', () =>{
           cy.get('.dPGPhg').click();
           cy.wait(5000)
           cy.get('#add-product-proceed-button').click()
+          cy.wait(5000)
           cy.get('#measurement-shipping-weight').type("1");
           cy.get('#measurement-shipping-depth').type("2");
           cy.get('#measurement-shipping-height').type("3");
@@ -214,7 +220,9 @@ describe('Product', () =>{
           cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
           cy.get('#add-product-proceed-button').click();
+          cy.wait(5000)
           cy.get('#add-product-proceed-button').click();
+          cy.wait(5000)
 
           cy.get('.sc-eeDRCX > :nth-child(1) > #certification-certificate-type').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("NAFDAC")
@@ -279,6 +287,7 @@ describe('Product', () =>{
         cy.get('.dPGPhg').click();
         cy.wait(5000)
         cy.get('#add-product-proceed-button').click()
+        cy.wait(5000)
         cy.get('#measurement-shipping-weight').type("1");
         cy.get('#measurement-shipping-depth').type("2");
         cy.get('#measurement-shipping-height').type("3");
@@ -300,7 +309,9 @@ describe('Product', () =>{
         cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
         cy.get('#add-product-proceed-button').click();
+        cy.wait(5000)
         cy.get('#add-product-proceed-button').click();
+        cy.wait(5000)
 
         cy.get('.sc-eeDRCX > :nth-child(1) > #certification-certificate-type').click();
         cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("NAFDAC")
@@ -315,7 +326,9 @@ describe('Product', () =>{
             cy.get('#certification-product-barcode-number').type("5611471582527");
           });
           cy.get('#add-product-proceed-button').click();
-          cy.get('#add-product-proceed-button').click();
+          cy.wait(2000)
+          // cy.get('#add-product-proceed-button').click();
+          // cy.wait(5000)
           cy.contains('Product Bar Code Already Existed.').should('be.visible');
     });
 
@@ -336,11 +349,15 @@ describe('Product', () =>{
         cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
         cy.wait(5000);
         cy.get('#products').click();
+        cy.wait(15000);
         //Start - clicking on Ellipse on Product
-        cy.get('tbody tr')
-          .first()
-          .find('[id$="-action-button"]')
-          .click();
+        // cy.get('tbody tr')
+        //   .first()
+        //   .find('[id$="-action-button"]')
+        //   .click();
+        cy.get('[id$="-action-button"]')
+              .first()
+              .click();
         //End - clicking on Ellipse on Product
         cy.wait(5000);
         cy.get('[id$="-Edit-button"]').click();
@@ -383,14 +400,21 @@ describe('Product', () =>{
         cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
         cy.wait(5000);
         cy.get('#products').click();
+        cy.get(20000);
+        //cy.scrollTo('top');
+        cy.scrollTo('right');
         //Start - clicking on Ellipse on Product
-        cy.get('tbody tr')
-          .first()
-          .find('[id$="-action-button"]')
-          .click();
+        cy.wait(5000);
+        // cy.get('tbody tr')
+        //   .first()
+        //   .find('[id$="-action-button"]')
+        //   .click();
+        cy.get('[id$="-action-button"]')
+            .first()
+            .click();
         //End - clicking on Ellipse on Product
         cy.wait(5000);
-        cy.get('[id$="Deactivate Product-button"]')
+        cy.get('[id$="Deactivate\ Product-button"]')
           .first()
           .click();
           cy.get('#confirm-deactivate-button').click();
@@ -417,10 +441,14 @@ describe('Product', () =>{
         cy.wait(5000);
         cy.get('#products').click();
         //Start - clicking on Ellipse on Product
-        cy.get('tbody tr')
-          .first()
-          .find('[id$="-action-button"]')
-          .click();
+        cy.wait(5000);
+        // cy.get('tbody tr')
+        //   .first()
+        //   .find('[id$="-action-button"]')
+        //   .click();
+        cy.get('[id$="-action-button"]')
+            .first()
+            .click();
         //End - clicking on Ellipse on Product
         cy.wait(5000);
         cy.get('[id$="-View-button"]').click();
@@ -433,16 +461,6 @@ describe('Product', () =>{
         cy.contains('Pricing Details').should('be.visible');
         cy.contains('SKU Images').should('be.visible');
 
-
-
-
-
-        // cy.get('[id$="Deactivate Product-button"]')
-        //   .first()
-        //   .click();
-        //   cy.get('#confirm-deactivate-button').click();
-        // cy.contains('Product deactivated successfully!')
-        //   .should('be.visible');
 
     });
 
