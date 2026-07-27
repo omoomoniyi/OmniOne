@@ -15,6 +15,7 @@ describe('Employee', () =>{
             cy.wait(20000);
             cy.get('#sidebar-employee-page-link > .sc-cVzyXr').click();
             cy.get('#employee').click();
+            cy.wait(3000);
             cy.get('#employee-dir-actions').click();
             cy.get('#employee-dir-actions-add_single_employee-button').click();
             // cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
@@ -24,7 +25,7 @@ describe('Employee', () =>{
                 cy.get(':nth-child(1) > .sc-dtInlp > #employee-name').type(firstName);
                 cy.get(':nth-child(2) > .sc-dtInlp > #employee-name').type(lastName);
               });
-            cy.get('.sc-eeDRCX > :nth-child(1) > #employee-team').click();
+            cy.get('#employee-team-selected').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("QA Team")
             cy.contains('QA Team')
               .first()
@@ -62,7 +63,7 @@ describe('Employee', () =>{
           cy.generatePhoneNumber().then((phonenumber) => {
             cy.get('[style="width: 100%; margin-top: -4px;"] > .sc-fBWQRA > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type(phonenumber);
           });
-          cy.get('.sc-eeDRCX > :nth-child(1) > #employee-office-address').click();
+          cy.get('#employee-office-address-selected').click();
         //   cy.get('[data-testid="address-dropdown"]').click(); // open dropdown
             cy.get('.sc-koXPm')   // adjust to actual item selector
                 .eq(0)                  // first item (index 0)
@@ -73,8 +74,8 @@ describe('Employee', () =>{
           .first()
           .click();
           cy.get('body').click(0, 0);
-          cy.get('.sc-eDPEui > .dctKQR > :nth-child(2) > .sc-imWYAH > .sc-dCFHLc > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
-          cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("All")
+          cy.get('#state-selected').click();
+          cy.get('#state-search').type("All")
           cy.contains('All')
           .first()
           .click();
@@ -105,7 +106,7 @@ describe('Employee', () =>{
           cy.wait(20000);
           //cy.get('#sidebar-employee-page-link > .sc-cVzyXr').click();
           cy.get('#employee').click();
-          cy.wait(2000)
+          cy.wait(3000)
           cy.get('#employee-dir-actions').click();
           cy.get('#employee-dir-actions-add_single_employee-button').click();
           //cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
@@ -115,7 +116,7 @@ describe('Employee', () =>{
               cy.get(':nth-child(1) > .sc-dtInlp > #employee-name').type(firstName);
               cy.get(':nth-child(2) > .sc-dtInlp > #employee-name').type(lastName);
             });
-          cy.get('.sc-eeDRCX > :nth-child(1) > #employee-team').click();
+          cy.get('#employee-team-selected').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("QA Team")
           cy.contains('QA Team')
             .first()
@@ -166,7 +167,7 @@ describe('Employee', () =>{
         // });
         cy.get('#phone_number').type('8029829449')
 
-        cy.get('.sc-eeDRCX > :nth-child(1) > #employee-office-address').click();
+        cy.get('#employee-office-address-selected').click();
       //   cy.get('[data-testid="address-dropdown"]').click(); // open dropdown
           cy.get('.sc-koXPm')   // adjust to actual item selector
               .eq(0)                  // first item (index 0)
@@ -177,8 +178,8 @@ describe('Employee', () =>{
         .first()
         .click();
         cy.get('body').click(0, 0);
-        cy.get('.sc-eDPEui > .dctKQR > :nth-child(2) > .sc-imWYAH > .sc-dCFHLc > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
-        cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("All")
+        cy.get('#state-selected').click();
+        cy.get('#state-search').type("All")
         cy.contains('All')
         .first()
         .click();

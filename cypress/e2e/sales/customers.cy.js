@@ -4,7 +4,7 @@ describe("Customers", () => {
     cy.visit("/");
 
     //cy.screenshot("Home Page")
-
+    //login once and save your session
     cy.fixture("customerData").then((userData) => {
       let customerDetailsInfo = userData.customerInfo[0];
       cy.validLoginFlow(customerDetailsInfo);
@@ -73,7 +73,7 @@ describe("Customers", () => {
       cy.get('#location_type').click();
       cy.get('#location_type-search').click();
       cy.get('#location_type-option-3').click();
-      cy.get('#state').click();
+      cy.get('#state-selected').click();
       cy.wait(2000);
       cy.get('#state-search').type('Lagos');
       cy.get('#state-option-125').click();
@@ -171,7 +171,7 @@ describe("Customers", () => {
       cy.get('#location_type').click();
       cy.get('#location_type-search').click();
       cy.get('#location_type-option-3').click();
-      cy.get('#state').click();
+      cy.get('#state-selected').click();
       cy.wait(2000);
       cy.get('#state-search').type('Lagos');
       cy.get('#state-option-125').click();
@@ -333,7 +333,7 @@ describe("Customers", () => {
       cy.get('#location_type').click();
       cy.get('#location_type-search').click();
       cy.get('#location_type-option-3').click();
-      cy.get('#state').click();
+      cy.get('#state-selected').click();
       cy.wait(2000);
       cy.get('#state-search').type('Lagos');
       cy.get('#state-option-125').click();
@@ -390,7 +390,8 @@ describe("Customers", () => {
         .click();
       // cy.get('#assign_from')
       cy.get('body').click(0, 0);
-      cy.get(':nth-child(2) > .sc-czkgLO').click();
+      // cy.get(':nth-child(2) > .sc-czkgLO').click();
+      cy.get('.sc-dycYrq').click();
 
       cy.get('tbody tr label').eq(8).click();
  
