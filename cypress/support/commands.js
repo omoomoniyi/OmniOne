@@ -92,10 +92,11 @@ Cypress.Commands.add("validLoginFlow", () => {
   // Step 3: Run login steps on SSO origin
   cy.origin(Cypress.env('SSO_URL'), () => {
 
-    cy.get('#use-phone-number', { timeout: 15000 }).click();
+    cy.get('#use-email-or-agent-code', { timeout: 15000 }).click();
     cy.get('#email-input').type('202265');
     cy.contains('button', 'Continue').click();
     cy.get('input[type="password"]').type('12345678');
+    cy.wait(3000);
     cy.get('#signin-button').click();
 
     // Handle optional consent modal before SSO redirects back to main app
@@ -118,47 +119,101 @@ Cypress.Commands.add("validLoginFlow", () => {
 
   });
 
+});
+
+
+Cypress.Commands.add('generateSignupData', () => {
+  return cy.wrap({
+    phoneNumber: `80${Math.floor(10000000 + Math.random() * 90000000)}`,
+    email: `qa.${Date.now()}@yopmail.com`,
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    password: 'Password@123'
+  });
 });
 
 Cypress.Commands.add("signup", () => {
 
-  // Step 1: Click login (triggers redirect to SSO)
   cy.get('#continue-with-omni').click();
-
-  // Step 2: Give the SSO redirect time to initiate before entering cy.origin
   cy.wait(3000);
 
-  // Step 3: Run login steps on SSO origin
-  cy.origin(Cypress.env('SSO_URL'), () => {
+  cy.generateSignupData().then((user) => {
 
-    cy.get('#createaccount-button', { timeout: 15000 }).click();
-    cy.get('#first-name-input').type('Omoniyi');
-    cy.get('#last-name-input').type('Solomon');
-    cy.contains('button', 'Continue').click();
-    cy.get('input[type="password"]').type('12345678');
-    cy.get('#signin-button').click();
+    cy.origin(
+      Cypress.env('SSO_URL'),
+      { args: { user } },
+      ({ user }) => {
 
-    // Handle optional consent modal before SSO redirects back to main app
-    cy.get('body', { timeout: 15000 }).then(($body) => {
+        cy.get('#createaccount-button', { timeout: 15000 }).click();
 
-      if ($body.find('h2:contains("Grant OmniOne Access to Your Data")').length) {
+        cy.wait(3000);
+        cy.get('#country-select-selected').click();
+        cy.get('#country-select-option-1').click();
 
-        cy.contains('h2', 'Grant OmniOne Access to Your Data')
-          .closest('div')
-          .parent()
-          .within(() => {
-            cy.contains('button', 'Grant Access').click();
-          });
+        cy.get('#phone-number-input').type(user.phoneNumber);
+        cy.get('#email-input').type(user.email);
+        cy.get('#first-name-input').type(user.firstName);
+        cy.get('#last-name-input').type(user.lastName);
+        cy.get('#password-input').type(user.password);
+        cy.get('#confirm-password-input').type(user.password);
 
-      } else {
-        cy.log('Grant Access modal not present');
+        cy.get('#terms-and-conditions-checkbox').click();
+        cy.get('#create-account-button').click();
+        cy.get(':nth-child(1) > .sc-byRegH').type('123456')
+        cy.get('#sms-otp-option').click();
+        cy.wait(2000);
+        cy.get('#receiveOTP-button').click();
+        cy.get('#otp-form_1').type(1234567);
+        cy.get('#verify-OTP-button').click();
+        cy.contains('button', 'Grant Access').click();
+
+ 
       }
-
-    });
+    );
 
   });
 
 });
+
+// Cypress.Commands.add("signup", () => {
+
+//   // Step 1: Click login (triggers redirect to SSO)
+//   cy.get('#continue-with-omni').click();
+
+//   // Step 2: Give the SSO redirect time to initiate before entering cy.origin
+//   cy.wait(3000);
+
+//   // Step 3: Run login steps on SSO origin
+//   cy.origin(Cypress.env('SSO_URL'), () => {
+
+//     cy.get('#createaccount-button', { timeout: 15000 }).click();
+//     cy.wait(2000);
+//     cy.get('#country-select-selected').click();
+//     cy.wait(2000);
+//     cy.get('#country-select-option-1').click();
+//     const phoneNumber = "80" + Math.floor(10000000 + Math.random() * 90000000);
+//     cy.get('#phone-number-input').type(phoneNumber);
+
+//     cy.origin(Cypress.env('SSO_URL'), () => {
+
+//       const email = `user${Date.now()}@yopmail.com`;
+    
+//       cy.get('#email-input').type(email);
+    
+//     });
+
+//     //cy.get('#email-input').type('12345678@yopmail.com');
+//     cy.get('#first-name-input').type('Omoniyi');
+//     cy.get('#last-name-input').type('Solomon');
+//     cy.get('#password-input').type('Mm12345678!@#$');
+//     cy.get('#confirm-password-input').type('Mm12345678!@#$');
+//     cy.get('#terms-and-conditions-checkbox').click();
+//     cy.get('#create-account-button').click();
+
+
+//   });
+
+// });
 
 
 
@@ -310,28 +365,28 @@ Cypress.Commands.add('generateBeatplanName', () => {
 
 Cypress.Commands.add('setStartAndEndDate', (daysAhead = 6) => {
 
-  const startDate = new Date();
-  const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + daysAhead);
+  const start = new Date();
+  const end = new Date(start);
+  end.setDate(start.getDate() + daysAhead);
 
-  const formatDate = (date) => {
-    return date.toISOString().split('T')[0]; // yyyy-mm-dd
-  };
+  // Select start date
+  cy.get('#start_date').click();
+  cy.contains('.rdrDay:not(.rdrDayPassive)', start.getDate()).click();
 
-  const start = formatDate(startDate);
-  const end = formatDate(endDate);
+  // Open end date picker
+  cy.get('#end_date').click();
 
-  // Start Date
-  cy.get('#start_date')   // 🔁 update selector if needed
-    .clear()
-    .type(start);
+  // Move to next month if required
+  if (
+    start.getMonth() !== end.getMonth() ||
+    start.getFullYear() !== end.getFullYear()
+  ) {
+    cy.get('.rdrNextButton').click();
+  }
 
-  // End Date
-  cy.get('#end_date')     // 🔁 update selector if needed
-    .clear()
-    .type(end);
+  // Select end day
+  cy.contains('.rdrDay:not(.rdrDayPassive)', end.getDate()).click();
 });
-
 
 
 Cypress.Commands.add('generateBusinessName', () => {
@@ -346,8 +401,9 @@ Cypress.Commands.add('generatePromoName', () => {
   cy.wrap(promoName);
 });
 
-Cypress.Commands.add('setPromoDates', () => {
 
+
+Cypress.Commands.add('setPromoDates', () => {
   const today = new Date();
 
   const end = new Date();
@@ -357,25 +413,60 @@ Cypress.Commands.add('setPromoDates', () => {
   const endDay = end.getDate().toString();
 
   // START DATE
-  cy.get('#start_date')
-    .should('be.visible')
-    .click();
+  cy.get('#start_date').click();
 
   cy.contains('.rdrDay:not(.rdrDayPassive)', startDay)
-    .scrollIntoView()
-    .trigger('mouseover')
     .click({ force: true });
 
   // END DATE
-  cy.get('#end_date')
-    .should('be.visible')
-    .click();
+  cy.get('#end_date').click();
+
+  // If end date is in a different month, go to next month
+  if (
+    end.getMonth() !== today.getMonth() ||
+    end.getFullYear() !== today.getFullYear()
+  ) {
+    cy.get('.rdrNextPrevButton.rdrNextButton').click();
+  }
 
   cy.contains('.rdrDay:not(.rdrDayPassive)', endDay)
-    .scrollIntoView()
-    .trigger('mouseover')
     .click({ force: true });
+});
 
+Cypress.Commands.add('generateCustomerType', () => {
+  const customerTypes = [
+    'Distributor',
+    'Retailer',
+    'Wholesaler',
+    'Corporate',
+    'Supermarket',
+    'Pharmacy'
+  ];
+
+  const prefixes = {
+    Distributor: 'D',
+    Retailer: 'R',
+    Wholesaler: 'W',
+    Corporate: 'C',
+    Supermarket: 'S',
+    Pharmacy: 'P'
+  };
+
+  const type = customerTypes[Math.floor(Math.random() * customerTypes.length)];
+  const randomNumber = Cypress._.random(1000, 9999);
+
+  const customerType = `${type} ${prefixes[type]}${randomNumber}`;
+
+  return cy.wrap(customerType);
+});
+
+Cypress.Commands.add('generateCACNumber', () => {
+  const randomDigits = Cypress._.random(100000, 999999);
+  return cy.wrap(`RC100${randomDigits}`);
+});
+
+Cypress.Commands.add('generateTradingCompanyName', () => {
+  return cy.wrap(faker.company.name());
 });
 
 

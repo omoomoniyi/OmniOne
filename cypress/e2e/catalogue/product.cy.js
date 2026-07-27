@@ -33,7 +33,7 @@ describe('Product', () =>{
             cy.generateManufacturerSKU().then((sku) => {
                 cy.get('#general-info-manufacturer-sku-code').type(sku);
               });
-              cy.get(':nth-child(1) > #general-info-packaging-type').click();
+              cy.get('#general-info-packaging-type').click();
               cy.contains('CASE')
               .first()
               .click();
@@ -51,19 +51,19 @@ describe('Product', () =>{
             cy.get('#measurement-shipping-depth').type("2");
             cy.get('#measurement-shipping-height').type("3");
             cy.get('#measurement-shipping-width').type("4");
-            cy.get(':nth-child(1) > #measurement-shipping-weight-unit').click();
+            cy.get('#measurement-shipping-weight-unit').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("kg")
             cy.get('.sc-esYiGC').click();
 
-            cy.get(':nth-child(1) > #measurement-shipping-depth-unit').click();
+            cy.get('#measurement-shipping-depth-unit').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
             cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-            cy.get(':nth-child(1) > #measurement-shipping-height-unit').click();
+            cy.get('#measurement-shipping-height-unit').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
             cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-            cy.get(':nth-child(1) > #measurement-shipping-width-unit').click();
+            cy.get('#measurement-shipping-width-unit').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
             cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
@@ -72,7 +72,7 @@ describe('Product', () =>{
             cy.get('#add-product-proceed-button').click();
             cy.wait(5000)
 
-            cy.get('.sc-eeDRCX > :nth-child(1) > #certification-certificate-type').click();
+            cy.get('#certification-certificate-type').click();
             cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("NAFDAC")
             cy.get('.sc-jxOSlu > :nth-child(1)').click();
             cy.get('body').click(0, 0);
@@ -126,7 +126,7 @@ describe('Product', () =>{
               cy.get('#general-info-variant').type(variant);
             });
           cy.get('#general-info-manufacturer-sku-code').type("MFG-EBRF74");
-          cy.get(':nth-child(1) > #general-info-packaging-type').click();
+          cy.get('#general-info-packaging-type').click();
           cy.contains('CASE')
             .first()
             .click();
@@ -180,7 +180,7 @@ describe('Product', () =>{
           cy.generateManufacturerSKU().then((sku) => {
               cy.get('#general-info-manufacturer-sku-code').type(sku);
             });
-            cy.get(':nth-child(1) > #general-info-packaging-type').click();
+            cy.get('#general-info-packaging-type').click();
             cy.contains('CASE')
             .first()
             .click();
@@ -203,19 +203,19 @@ describe('Product', () =>{
           //     .type('kg');
           // cy.contains('kg')
           //     .click();
-          cy.get(':nth-child(1) > #measurement-shipping-weight-unit').click();
+          cy.get('#measurement-shipping-weight-unit').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("kg")
           cy.get('.sc-esYiGC').click();
 
-          cy.get(':nth-child(1) > #measurement-shipping-depth-unit').click();
+          cy.get('#measurement-shipping-depth-unit').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
           cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-          cy.get(':nth-child(1) > #measurement-shipping-height-unit').click();
+          cy.get('#measurement-shipping-height-unit').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
           cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-          cy.get(':nth-child(1) > #measurement-shipping-width-unit').click();
+          cy.get('#measurement-shipping-width-unit').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
           cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
@@ -224,7 +224,7 @@ describe('Product', () =>{
           cy.get('#add-product-proceed-button').click();
           cy.wait(5000)
 
-          cy.get('.sc-eeDRCX > :nth-child(1) > #certification-certificate-type').click();
+          cy.get('#certification-certificate-type').click();
           cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("NAFDAC")
           cy.get('.sc-jxOSlu > :nth-child(1)').click();
           cy.get('body').click(0, 0);
@@ -274,7 +274,7 @@ describe('Product', () =>{
         cy.generateManufacturerSKU().then((sku) => {
             cy.get('#general-info-manufacturer-sku-code').type(sku);
           });
-          cy.get(':nth-child(1) > #general-info-packaging-type').click();
+          cy.get('#general-info-packaging-type').click();
           cy.contains('CASE')
           .first()
           .click();
@@ -292,19 +292,19 @@ describe('Product', () =>{
         cy.get('#measurement-shipping-depth').type("2");
         cy.get('#measurement-shipping-height').type("3");
         cy.get('#measurement-shipping-width').type("4");
-        cy.get(':nth-child(1) > #measurement-shipping-weight-unit').click();
+        cy.get('#measurement-shipping-weight-unit').click();
         cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("kg")
         cy.get('.sc-esYiGC').click();
 
-        cy.get(':nth-child(1) > #measurement-shipping-depth-unit').click();
+        cy.get('#measurement-shipping-depth-unit').click();
         cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
         cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-        cy.get(':nth-child(1) > #measurement-shipping-height-unit').click();
+        cy.get('#measurement-shipping-height-unit').click();
         cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
         cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-        cy.get(':nth-child(1) > #measurement-shipping-width-unit').click();
+        cy.get('#measurement-shipping-width-unit').click();
         cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("cm")
         cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
@@ -313,7 +313,7 @@ describe('Product', () =>{
         cy.get('#add-product-proceed-button').click();
         cy.wait(5000)
 
-        cy.get('.sc-eeDRCX > :nth-child(1) > #certification-certificate-type').click();
+        cy.get('#certification-certificate-type').click();
         cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("NAFDAC")
         cy.get('.sc-jxOSlu > :nth-child(1)').click();
         cy.get('body').click(0, 0);
