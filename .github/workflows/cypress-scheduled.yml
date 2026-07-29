@@ -52,7 +52,8 @@ jobs:
           if-no-files-found: ignore
 
       - name: Send email report
-        if: always() && secrets.EMAIL_USERNAME != '' && secrets.SMTP_SERVER != ''
+        if: always()
+        continue-on-error: true
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.SMTP_SERVER }}
