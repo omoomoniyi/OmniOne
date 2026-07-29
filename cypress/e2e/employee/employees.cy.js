@@ -9,20 +9,19 @@ describe('Employee', () => {
   });
 
   it('Creating new employee', () => {
-    cy.get('#sidebar-employee-page-link > .sc-cVzyXr').click();
+    cy.get('#sidebar-employee-page-link').click();
     cy.get('#employee').click();
     cy.wait(3000);
     cy.get('#employee-dir-actions').click();
     cy.get('#employee-dir-actions-add_single_employee-button').click();
-    // cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
     cy.wait(3000);
 
     cy.generateFullName().then(({ firstName, lastName }) => {
-      cy.get(':nth-child(1) > .sc-dtInlp > #employee-name').type(firstName);
-      cy.get(':nth-child(2) > .sc-dtInlp > #employee-name').type(lastName);
+      cy.get('#create-employee-first-name').type(firstName);
+      cy.get('#create-employee-last-name').type(lastName);
     });
     cy.get('#employee-team-selected').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('QA Team');
+    cy.get('#employee-team-search').type('QA Team');
     cy.contains('QA Team')
       .first()
       .click();
@@ -30,8 +29,8 @@ describe('Employee', () => {
     cy.generateEmployeeCode().then((code) => {
       cy.get('#employee-code').type(code);
     });
-    cy.get('#employee-role').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Field Sales Manager');
+    cy.get('#employee-role-selected').click();
+    cy.get('#employee-role-search').type('Field Sales Manager');
     cy.contains('Field Sales Manager')
       .first()
       .click();
@@ -43,28 +42,20 @@ describe('Employee', () => {
     cy.get('#employee-role-to-report-to-6757').click();
     cy.get('#employee-role-to-report-to-6757-option-646317').click();
     cy.get('body').click(0, 0);
-
-    // cy.get('.sc-eeDRCX > :nth-child(1) > #employee-role-to-report-to-3110').click();
-    // cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("SFA TESTING");
-    // cy.contains('SFA TESTING')
-    // .first()
-    // .click();
     cy.wait(2000);
-    //cy.get('body').click(0, 0);
     cy.generateEmail().then((email) => {
       cy.get('#employee-email').type(email);
     });
 
     cy.generatePhoneNumber().then((phonenumber) => {
-      cy.get('[style="width: 100%; margin-top: -4px;"] > .sc-fBWQRA > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type(phonenumber);
-    });
+      cy.get('#phone_number').type(phonenumber);
+    });    
     cy.get('#employee-office-address-selected').click();
-    //   cy.get('[data-testid="address-dropdown"]').click(); // open dropdown
-    cy.get('.sc-koXPm')   // adjust to actual item selector
-      .eq(0)                  // first item (index 0)
-      .click();
-    cy.get('.dpJqzr > .sc-dCFHLc > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('State');
+    cy.get('[id^="employee-office-address-option-"]')
+    .first()
+    .click();
+    cy.get('#select_which_level_you_would_set_your_location_for-selected').click();
+    cy.get('#select_which_level_you_would_set_your_location_for-search').type('State');
     cy.contains('State')
       .first()
       .click();
@@ -85,15 +76,14 @@ describe('Employee', () => {
     cy.wait(3000);
     cy.get('#employee-dir-actions').click();
     cy.get('#employee-dir-actions-add_single_employee-button').click();
-    //cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
     cy.wait(3000);
 
     cy.generateFullName().then(({ firstName, lastName }) => {
-      cy.get(':nth-child(1) > .sc-dtInlp > #employee-name').type(firstName);
-      cy.get(':nth-child(2) > .sc-dtInlp > #employee-name').type(lastName);
+      cy.get('#create-employee-first-name').type(firstName);
+      cy.get('#create-employee-last-name').type(lastName);
     });
     cy.get('#employee-team-selected').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('QA Team');
+    cy.get('#employee-team-search').type('QA Team');
     cy.contains('QA Team')
       .first()
       .click();
@@ -101,8 +91,8 @@ describe('Employee', () => {
     cy.generateEmployeeCode().then((code) => {
       cy.get('#employee-code').type(code);
     });
-    cy.get('#employee-role').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Field Sales Manager');
+    cy.get('#employee-role-selected').click();
+    cy.get('#employee-role-search').type('Field Sales Manager');
     cy.contains('Field Sales Manager')
       .first()
       .click();
@@ -111,40 +101,19 @@ describe('Employee', () => {
     cy.get('#employee-role-to-report-to-6051').click();
     cy.get('#employee-role-to-report-to-6051-option-125470').click();
     cy.get('body').click(0, 0);
-
-    // // cy.get('[id*="-option-"]')
-    // .first()
-    // .click();
-
     cy.get('#employee-role-to-report-to-6757').click();
     cy.get('#employee-role-to-report-to-6757-option-646317').click();
     cy.get('body').click(0, 0);
-
-    // cy.get('#employee-role-to-report-to-6757-option-646317')
-
-    //   cy.get('.sc-eeDRCX > :nth-child(1) > #employee-role-to-report-to-3110').click();
-    //   cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type("SFA TESTING");
-    //   cy.contains('SFA TESTING')
-    //   .first()
-    //   .click();
-    // cy.wait(2000);
-    // cy.get('body').click(0, 0);
     cy.generateEmail().then((email) => {
       cy.get('#employee-email').type(email);
     });
-
-    // cy.generatePhoneNumber().then((phonenumber) => {
-    //   cy.get('[style="width: 100%; margin-top: -4px;"] > .sc-fBWQRA > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type(phonenumber);
-    // });
     cy.get('#phone_number').type('8029829449');
-
     cy.get('#employee-office-address-selected').click();
-    //   cy.get('[data-testid="address-dropdown"]').click(); // open dropdown
-    cy.get('.sc-koXPm')   // adjust to actual item selector
-      .eq(0)                  // first item (index 0)
-      .click();
-    cy.get('.dpJqzr > .sc-dCFHLc > .sc-eeDRCX > :nth-child(1) > .sc-tagGt').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('State');
+    cy.get('[id^="employee-office-address-option-"]')
+    .first()
+    .click();
+    cy.get('#select_which_level_you_would_set_your_location_for-selected').click();
+    cy.get('#select_which_level_you_would_set_your_location_for-search').type('State');
     cy.contains('State')
       .first()
       .click();
