@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
-      BASE_URL: ${{ secrets.BASE_URL || vars.BASE_URL }}
-      SSO_URL: ${{ secrets.SSO_URL || vars.SSO_URL }}
-      CYPRESS_baseUrl: ${{ secrets.BASE_URL || vars.BASE_URL }}
-      CYPRESS_SSO_URL: ${{ secrets.SSO_URL || vars.SSO_URL }}
+      BASE_URL: ${{ secrets.BASE_URL || vars.BASE_URL || 'https://mos-dev-tau.vercel.app/' }}
+      SSO_URL: ${{ secrets.SSO_URL || vars.SSO_URL || 'https://sso-dev.vercel.app' }}
+      CYPRESS_baseUrl: ${{ secrets.BASE_URL || vars.BASE_URL || 'https://mos-dev-tau.vercel.app/' }}
+      CYPRESS_SSO_URL: ${{ secrets.SSO_URL || vars.SSO_URL || 'https://sso-dev.vercel.app' }}
 
     steps:
       - name: Checkout code
@@ -49,6 +49,12 @@ jobs:
               ;;
           esac
           echo "BASE_URL and SSO_URL are configured."
+          if [ "${{ secrets.BASE_URL }}" = "" ] && [ "${{ vars.BASE_URL }}" = "" ]; then
+            echo "::warning::Using default staging BASE_URL. Add a BASE_URL secret to override."
+          fi
+          if [ "${{ secrets.SSO_URL }}" = "" ] && [ "${{ vars.SSO_URL }}" = "" ]; then
+            echo "::warning::Using default staging SSO_URL. Add a SSO_URL secret to override."
+          fi
 
       - name: Run Cypress tests
         id: cypress
