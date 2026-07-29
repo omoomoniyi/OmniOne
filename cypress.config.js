@@ -1,10 +1,13 @@
 const { defineConfig } = require("cypress");
 require("dotenv").config();
 
+const baseUrl = process.env.BASE_URL || process.env.CYPRESS_baseUrl;
+const ssoUrl = process.env.SSO_URL || process.env.CYPRESS_SSO_URL;
+
 module.exports = defineConfig({
   e2e: {
 
-    baseUrl: process.env.BASE_URL,
+    baseUrl,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
@@ -16,7 +19,7 @@ module.exports = defineConfig({
 
       //Usage in test script cy.visit(Cypress.env('adminuRL'))
       adminURL: "https://dmsmonoadmindev.z6.web.core.windows.net/",
-      SSO_URL: process.env.SSO_URL,
+      SSO_URL: ssoUrl,
 
     }
   },
