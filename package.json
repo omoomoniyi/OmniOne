@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress open --e2e -b chrome"
+    "test": "npx cypress open --e2e -b chrome",
+    "test:ci": "cypress run --browser chrome --spec 'cypress/e2e/**/*.cy.js' --exclude-spec 'cypress/e2e/signUp/**'"
   },
   "author": "",
   "license": "ISC",
