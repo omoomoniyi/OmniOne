@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -30,7 +30,6 @@ jobs:
         id: cypress
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
           command: npm run test:ci
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
@@ -53,7 +52,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Send email report
-        if: always()
+        if: always() && secrets.EMAIL_USERNAME != '' && secrets.SMTP_SERVER != ''
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.SMTP_SERVER }}
@@ -62,7 +61,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: Cypress Report - ${{ job.status }} - Run #${{ github.run_number }}
           to: omoniyi.osadare@mplify.com
-          from: ${{ secrets.EMAIL_FROM }}
+          from: ${{ secrets.EMAIL_USERNAME }}
           body: |
             Cypress automation finished.
 
