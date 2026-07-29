@@ -1,17 +1,33 @@
 name: Scheduled Cypress Tests
 
 on:
+  # Run when a Pull Request is merged into main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+  # Scheduled runs in WAT (UTC+1)
   schedule:
-    # WAT (UTC+1): 6:00 AM, 12:00 PM, 8:00 PM
-    - cron: '0 5 * * *'
-    - cron: '0 11 * * *'
-    - cron: '0 19 * * *'
+    - cron: '0 5 * * *'   # 6:00 AM WAT
+    - cron: '0 11 * * *'  # 12:00 PM WAT
+    - cron: '0 19 * * *'  # 8:00 PM WAT
+
+  # Allow manual execution
   workflow_dispatch:
 
 jobs:
   cypress-run:
+    # Prevent the workflow from running when a PR is closed
+    # without being merged
+    if: >
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.merged == true
+
     runs-on: ubuntu-latest
     timeout-minutes: 120
+
     env:
       BASE_URL: ${{ secrets.BASE_URL || vars.BASE_URL || 'https://mos-dev-tau.vercel.app/' }}
       SSO_URL: ${{ secrets.SSO_URL || vars.SSO_URL || 'https://sso-dev.vercel.app' }}
@@ -34,13 +50,15 @@ jobs:
       - name: Validate required environment variables
         run: |
           if [ -z "$BASE_URL" ]; then
-            echo "::error::BASE_URL is not set. Add it under Settings → Secrets and variables → Actions (Secrets or Variables tab). Name must be exactly BASE_URL and include https://"
+            echo "::error::BASE_URL is not set."
             exit 1
           fi
+
           if [ -z "$SSO_URL" ]; then
-            echo "::error::SSO_URL is not set. Add it under Settings → Secrets and variables → Actions (Secrets or Variables tab). Name must be exactly SSO_URL and include https://"
+            echo "::error::SSO_URL is not set."
             exit 1
           fi
+
           case "$BASE_URL" in
             http://*|https://*) ;;
             *)
@@ -48,13 +66,8 @@ jobs:
               exit 1
               ;;
           esac
+
           echo "BASE_URL and SSO_URL are configured."
-          if [ "${{ secrets.BASE_URL }}" = "" ] && [ "${{ vars.BASE_URL }}" = "" ]; then
-            echo "::warning::Using default staging BASE_URL. Add a BASE_URL secret to override."
-          fi
-          if [ "${{ secrets.SSO_URL }}" = "" ] && [ "${{ vars.SSO_URL }}" = "" ]; then
-            echo "::warning::Using default staging SSO_URL. Add a SSO_URL secret to override."
-          fi
 
       - name: Run Cypress tests
         id: cypress
