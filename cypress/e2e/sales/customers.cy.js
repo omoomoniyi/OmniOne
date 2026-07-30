@@ -19,10 +19,19 @@ describe('Customers', () => {
 
 
 
+    // cy.get('#customer_type-selected').click();
+    // cy.get('#customer_type-search').type('Distributor');
+    // cy.contains('Distributor')
+    //   .first()
+    //   .click();
+
     cy.get('#customer_type-selected').click();
-    cy.get('#customer_type-search').type('Distributor');
-    cy.contains('Distributor')
-      .first()
+
+    cy.get('#customer_type-search')
+      .type('Distributor');
+
+    cy.contains(/^Distributor$/)
+      .should('be.visible')
       .click();
 
     cy.generateFirstName().then((firstName) => {
@@ -98,9 +107,12 @@ describe('Customers', () => {
 
     cy.wait(5000);
     cy.get('#customer_type-selected').click();
-    cy.get('#customer_type-search').type('Distributor');
-    cy.contains('Distributor')
-      .first()
+
+    cy.get('#customer_type-search')
+      .type('Distributor');
+
+    cy.contains(/^Distributor$/)
+      .should('be.visible')
       .click();
 
     cy.generateFirstName().then((firstName) => {
@@ -174,9 +186,12 @@ describe('Customers', () => {
     cy.get('#customer-actions-button').click();
     cy.get('#add_single_customer-button').click();
     cy.get('#customer_type-selected').click();
-    cy.get('#customer_type-search').type('Distributor');
-    cy.contains('Distributor')
-      .first()
+
+    cy.get('#customer_type-search')
+      .type('Distributor');
+
+    cy.contains(/^Distributor$/)
+      .should('be.visible')
       .click();
 
     cy.generateFirstName().then((firstName) => {
@@ -215,9 +230,12 @@ describe('Customers', () => {
     cy.get('#customer-actions-button').click();
     cy.get('#add_single_customer-button').click();
     cy.get('#customer_type-selected').click();
-    cy.get('#customer_type-search').type('Distributor');
-    cy.contains('Distributor')
-      .first()
+
+    cy.get('#customer_type-search')
+      .type('Distributor');
+
+    cy.contains(/^Distributor$/)
+      .should('be.visible')
       .click();
 
     cy.generateFirstName().then((firstName) => {
