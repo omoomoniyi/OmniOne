@@ -10,9 +10,9 @@ on:
 
   # Scheduled runs in WAT (UTC+1)
   schedule:
-    - cron: '0 5 * * *'   # 6:00 AM WAT
-    - cron: '0 11 * * *'  # 12:00 PM WAT
-    - cron: '0 19 * * *'  # 8:00 PM WAT
+    - cron: '0 5 * * *'   # 6:15 AM WAT
+    - cron: '0 11 * * *'  # 12:30 PM WAT
+    - cron: '0 19 * * *'  # 8:15 PM WAT
 
   # Allow manual execution
   workflow_dispatch:
@@ -50,12 +50,12 @@ jobs:
       - name: Validate required environment variables
         run: |
           if [ -z "$BASE_URL" ]; then
-            echo "::error::BASE_URL is not set."
+            echo "::error::BASE_URL is not set. Add it under Settings → Secrets and variables → Actions (Secrets or Variables tab). Name must be exactly BASE_URL and include https://"
             exit 1
           fi
 
           if [ -z "$SSO_URL" ]; then
-            echo "::error::SSO_URL is not set."
+            echo "::error::SSO_URL is not set. Add it under Settings → Secrets and variables → Actions (Secrets or Variables tab). Name must be exactly SSO_URL and include https://"
             exit 1
           fi
 
@@ -68,6 +68,12 @@ jobs:
           esac
 
           echo "BASE_URL and SSO_URL are configured."
+          if [ "${{ secrets.BASE_URL }}" = "" ] && [ "${{ vars.BASE_URL }}" = "" ]; then
+            echo "::warning::Using default staging BASE_URL. Add a BASE_URL secret to override."
+          fi
+          if [ "${{ secrets.SSO_URL }}" = "" ] && [ "${{ vars.SSO_URL }}" = "" ]; then
+            echo "::warning::Using default staging SSO_URL. Add a SSO_URL secret to override."
+          fi
 
       - name: Run Cypress tests
         id: cypress
