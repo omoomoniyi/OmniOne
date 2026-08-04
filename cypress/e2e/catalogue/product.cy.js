@@ -15,8 +15,8 @@ describe('Product', () => {
     cy.wait(3000);
     cy.get('#add-product-button').click();
     cy.wait(3000);
-    cy.contains('Add Single Product').click();
-    cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
+    cy.get('#add_single_product-button').click();
+    cy.get('#add-single-product-searchbar').type('Test-ing');
     cy.get('.iGcBwn').click();
     //selecting and item on the drop-down list
     cy.contains('Test-ing')
@@ -47,21 +47,23 @@ describe('Product', () => {
     cy.get('#measurement-shipping-depth').type('2');
     cy.get('#measurement-shipping-height').type('3');
     cy.get('#measurement-shipping-width').type('4');
-    cy.get('#measurement-shipping-weight-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('kg');
-    cy.get('.sc-esYiGC').click();
 
-    cy.get('#measurement-shipping-depth-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-    cy.get('#measurement-shipping-height-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-weight-unit-selected').click();
+    cy.get('#measurement-shipping-weight-unit-search').type('kg');
+    cy.get('#measurement-shipping-weight-unit-option-kg').click();
 
-    cy.get('#measurement-shipping-width-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-depth-unit-selected').click();
+    cy.get('#measurement-shipping-depth-unit-search').type('cm');
+    cy.get('#measurement-shipping-depth-unit-option-cm').click();
+
+    cy.get('#measurement-shipping-height-unit-selected').click();
+    cy.get('#measurement-shipping-height-unit-search').type('cm');
+    cy.get('#measurement-shipping-height-unit-option-cm').click();
+
+    cy.get('#measurement-shipping-width-unit-selected').click();
+    cy.get('#measurement-shipping-width-unit-search').type('cm');
+    cy.get('#measurement-shipping-width-unit-option-cm').click();
 
     cy.get('#add-product-proceed-button').click();
     cy.wait(5000);
@@ -69,8 +71,8 @@ describe('Product', () => {
     cy.wait(5000);
 
     cy.get('#certification-certificate-type').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('NAFDAC');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#certification-certificate-type-search').type('NAFDAC');
+    cy.get('#certification-certificate-type-option-1').click();
     cy.get('body').click(0, 0);
 
     cy.generateNAFDACNumber().then((nafdac) => {
@@ -94,7 +96,7 @@ describe('Product', () => {
     cy.get('#add-product-button').click();
     cy.wait(3000);
     cy.contains('Add Single Product').click();
-    cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
+    cy.get('#add-single-product-searchbar').type('Test-ing');
     cy.get('.iGcBwn').click();
     //selecting and item on the drop-down list
     cy.contains('Test-ing')
@@ -130,7 +132,7 @@ describe('Product', () => {
     cy.get('#add-product-button').click();
     cy.wait(3000);
     cy.contains('Add Single Product').click();
-    cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
+    cy.get('#add-single-product-searchbar').type('Test-ing');
     cy.get('.iGcBwn').click();
     //selecting and item on the drop-down list
     cy.contains('Test-ing')
@@ -161,21 +163,23 @@ describe('Product', () => {
     cy.get('#measurement-shipping-depth').type('2');
     cy.get('#measurement-shipping-height').type('3');
     cy.get('#measurement-shipping-width').type('4');
-    cy.get('#measurement-shipping-weight-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('kg');
-    cy.get('.sc-esYiGC').click();
 
-    cy.get('#measurement-shipping-depth-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
 
-    cy.get('#measurement-shipping-height-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-weight-unit-selected').click();
+    cy.get('#measurement-shipping-weight-unit-search').type('kg');
+    cy.get('#measurement-shipping-weight-unit-option-kg').click();
 
-    cy.get('#measurement-shipping-width-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-depth-unit-selected').click();
+    cy.get('#measurement-shipping-depth-unit-search').type('cm');
+    cy.get('#measurement-shipping-depth-unit-option-cm').click();
+
+    cy.get('#measurement-shipping-height-unit-selected').click();
+    cy.get('#measurement-shipping-height-unit-search').type('cm');
+    cy.get('#measurement-shipping-height-unit-option-cm').click();
+
+    cy.get('#measurement-shipping-width-unit-selected').click();
+    cy.get('#measurement-shipping-width-unit-search').type('cm');
+    cy.get('#measurement-shipping-width-unit-option-cm').click();
 
     cy.get('#add-product-proceed-button').click();
     cy.wait(5000);
@@ -183,8 +187,8 @@ describe('Product', () => {
     cy.wait(5000);
 
     cy.get('#certification-certificate-type').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('NAFDAC');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#certification-certificate-type-search').type('NAFDAC');
+    cy.get('#certification-certificate-type-option-1').click();
     cy.get('body').click(0, 0);
 
     cy.get('#certification-certificate-number-1').type('PLUS36628338026334651213');
@@ -197,11 +201,11 @@ describe('Product', () => {
   });
 
   it('Creating SKU with Duplicate Product Bar Code Number', () => {
-    cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+    cy.get('#sidebar-catalogue-page-link').click();
     cy.get('#products').click();
     cy.get('#add-product-button').click();
-    cy.get('.sc-koXPm > .sc-imWYAH > :nth-child(1)').click();
-    cy.get('.ggUtBl > .sc-imWYAH > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('Test-ing');
+    cy.contains('Add Single Product').click();
+    cy.get('#add-single-product-searchbar').type('Test-ing');
     cy.get('.iGcBwn').click();
     //selecting and item on the drop-down list
     cy.contains('Test-ing')
@@ -232,21 +236,22 @@ describe('Product', () => {
     cy.get('#measurement-shipping-depth').type('2');
     cy.get('#measurement-shipping-height').type('3');
     cy.get('#measurement-shipping-width').type('4');
-    cy.get('#measurement-shipping-weight-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('kg');
-    cy.get('.sc-esYiGC').click();
 
-    cy.get('#measurement-shipping-depth-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-weight-unit-selected').click();
+    cy.get('#measurement-shipping-weight-unit-search').type('kg');
+    cy.get('#measurement-shipping-weight-unit-option-kg').click();
 
-    cy.get('#measurement-shipping-height-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-depth-unit-selected').click();
+    cy.get('#measurement-shipping-depth-unit-search').type('cm');
+    cy.get('#measurement-shipping-depth-unit-option-cm').click();
 
-    cy.get('#measurement-shipping-width-unit').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('cm');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#measurement-shipping-height-unit-selected').click();
+    cy.get('#measurement-shipping-height-unit-search').type('cm');
+    cy.get('#measurement-shipping-height-unit-option-cm').click();
+
+    cy.get('#measurement-shipping-width-unit-selected').click();
+    cy.get('#measurement-shipping-width-unit-search').type('cm');
+    cy.get('#measurement-shipping-width-unit-option-cm').click();
 
     cy.get('#add-product-proceed-button').click();
     cy.wait(5000);
@@ -254,8 +259,8 @@ describe('Product', () => {
     cy.wait(5000);
 
     cy.get('#certification-certificate-type').click();
-    cy.get('.sc-fhzFiN > .sc-kOHTFy > .sc-dtInlp > .sc-kOPcWA').type('NAFDAC');
-    cy.get('.sc-jxOSlu > :nth-child(1)').click();
+    cy.get('#certification-certificate-type-search').type('NAFDAC');
+    cy.get('#certification-certificate-type-option-1').click();
     cy.get('body').click(0, 0);
 
     cy.generateNAFDACNumber().then((nafdac) => {
@@ -271,7 +276,7 @@ describe('Product', () => {
   });
 
   it('Verify user Is able to edit Product/SKU', () => {
-    cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+    cy.get('#sidebar-catalogue-page-link').click();
     cy.wait(5000);
     cy.get('#products').click();
     cy.wait(15000);
@@ -302,7 +307,7 @@ describe('Product', () => {
   });
 
   it('Verify user Is able to deactivate SKU', () => {
-    cy.get('#sidebar-catalogue-page-link > .sc-cVzyXr').click();
+    cy.get('#sidebar-catalogue-page-link').click();
     cy.wait(5000);
     cy.get('#products').click();
     cy.get(20000);
