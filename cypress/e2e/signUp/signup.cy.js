@@ -10,15 +10,15 @@ describe('sign-up', () =>{
 
             let customerDetailsInfo = userData.customerInfo[0];
             cy.signup(customerDetailsInfo);
-            // cy.wait(15000);
+            cy.wait(5000);
             cy.get('#importer_exporter').click();
             // cy.get('#manufacturer').click();
             cy.get('#jurisdiction_of_registration').click();
             // cy.wait(10000);
         
-            cy.generateCACNumber().then((cacNumber) => {
-                cy.get('#cac_number').type(cacNumber);
-              });
+            // cy.generateCACNumber().then((cacNumber) => {
+            //     cy.get('#cac_number').type(cacNumber);
+            //   });
             
 
             cy.generateTradingCompanyName().then((companyName) => {
@@ -54,9 +54,9 @@ describe('sign-up', () =>{
             cy.get('#street_name').type('Market Square');
             cy.get('#unit_number').type('50');
 
-            cy.generatePhoneNumber().then((phonenumber) => {
-                cy.get('#alternate_contact_phone_number').type(phonenumber);
-              });
+            // cy.generatePhoneNumber().then((phonenumber) => {
+            //     cy.get('#alternate_contact_phone_number').type(phonenumber);
+            //   });
 
             cy.get('.kDmuAZ > .sc-iGgWBk').click();
             cy.get('input[type="file"]').selectFile(
