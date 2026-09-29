@@ -95,7 +95,7 @@ Cypress.Commands.add("validLoginFlow", () => {
     cy.get('#use-email-or-agent-code', { timeout: 15000 }).click();
     cy.get('#email-input').type('202265');
     cy.contains('button', 'Continue').click();
-    cy.get('input[type="password"]').type('12345678');
+    cy.get('input[type="password"]').type('Password@123');
     cy.wait(3000);
     cy.get('#signin-button').click();
 
